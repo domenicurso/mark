@@ -102,8 +102,8 @@ Key settings include:
 
 To obtain your Discord token:
 
-1. Open Discord in your web browser
-2. Press `Ctrl+Shift+I` (or `Cmd+Option+I` on macOS) to open Developer Tools
+1. Open Discord in your web browser or as a desktop application
+2. Press `Cmd+Option+I` to open Developer Tools
 3. Go to the Network tab
 4. In Discord, perform any action like changing channels
 5. Look for a request in the Network tab
@@ -123,5 +123,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Acknowledgements
 
-- Created by [@dombom](https://github.com/dombom)
+- Created by [@dombom](https://github.com/DomBom16)
 - Thanks to all contributors who have helped improve Mark
