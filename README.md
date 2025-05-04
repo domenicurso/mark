@@ -21,7 +21,7 @@ Mark is a customizable Discord status manager that automatically updates your st
 ### Platform Support
 
 - **macOS**: Full support including all features
-- **Linux/Windows**: Basic support with some limitations (idle detection and app detection may require platform-specific implementations)
+- **Linux/Windows**: Not supported, but implementations are welcome
 
 ## Installation
 
