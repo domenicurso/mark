@@ -15,7 +15,7 @@ Mark is a customizable Discord status manager that automatically updates your st
 
 ## Requirements
 
-- Python 3.6+
+- Python 3.12+ (sorry)
 - Discord Token (see installation instructions)
 
 ### Platform Support
