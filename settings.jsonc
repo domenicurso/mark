@@ -1,0 +1,107 @@
+{
+  // How many seconds must pass before updating the status.
+  "update_interval": 0,
+  // How long to wait in seconds before attempting another update cycle.
+  // Recommeded to be around half of the update interval.
+  "retry_interval": 0,
+  // Colorblind mode changes the colored dot in status updates (terminal) to the corresponding inital (Online, Idle, Dnd, iNvisible).
+  "colorblind": false,
+  "statuses": {
+    // Whether to show the current time in the status.
+    "show_time": false,
+    // String used to separate the status text from the time.
+    "separator": " – ",
+    // Time format to be displayed in statuses.
+    "time_format": "%H:%M",
+    // Default statuses when no specific condition or app status is active.
+    "default": ["🌞", "Existing"],
+    "idle": {
+      // Status to be displayed when the user is idle.
+      "status": ["😴", "Away"],
+      // Time in minutes before the idle status is triggered.
+      "timeout": 3,
+      // How to display the idle time.
+      //   "normal" - display the idle status
+      //   "elapsed" - display the idle status and the elapsed idle time
+      "display": "normal"
+    },
+    // Per-app statuses.
+    // You can define a status by using the format:
+    //   app_bundle: [emoji:string, text:string, type:online|idle|dnd|invisible="online"]
+    //   Find the bundle ID using `mark gb`.
+    "apps": {
+      "company.thebrowser.browser": ["🌐", "Researching"],
+      "com.hnc.discord": ["💬", "Chatting"],
+      "com.microsoft.vscode": ["👨‍💻", "Coding"],
+      "com.googlecode.iterm2": ["💻", "Commanding shells"],
+      "com.spotify.client": ["🎧", "Grooving", "dnd"],
+      "com.openai.chat": ["🤖", "Brainstorming"],
+      "com.figma.desktop": ["🎨", "Designing"],
+      "com.apple.finder": ["📂", "Browsing"],
+      "dev.zed.zed-preview": ["👨‍💻", "Coding"]
+    },
+    // Plugin settings.
+    "plugins": {
+      // List of enabled plugins by ID; the order of these plugins should be sorted from highest to lowest priority.
+      "_enabled": ["music", "browser", "code"],
+      // Browser plugin settings.
+      "browser": {
+        // List of browser apps to track.
+        "apps": ["company.thebrowser.browser"],
+        // How to display the status for browser activity.
+        //   "title" - display the title of the active tab
+        //   "url" - display the URL of the active tab
+        //   "none" - display no special status
+        "display": "none",
+        // Whether to include the per-app prefix if available.
+        "prefix": false,
+        // Whether to use special rules for specific websites.
+        "use_special": true,
+        // Special rules for specific websites.
+        // You can define a rule by using the format
+        //   website: [emoji:string, text:string, type:online|idle|dnd|invisible="online"]
+        "special_statuses": {
+          "youtube.com": ["📺", "Watching YouTube", "dnd"],
+          "github.com": ["🐙", "Browsing GitHub"],
+          "desmos.com": ["🧮", "Solving Equations"],
+          "classroom.google.com": ["📚", "Learning"],
+          "docs.google.com": ["📝", "Reading & Writing"],
+          "chatgpt.com": ["🤖", "Brainstorming"],
+          "localhost:3000": ["🧪", "Testing"]
+        }
+      },
+      // Music plugin settings.
+      "music": {
+        // List of music apps to track.
+        "apps": ["com.spotify.client"],
+        // How to display the music status.
+        //   "both" - display the artist and title
+        //   "artist" - display the artist
+        //   "title" - display the title
+        //   "none" - display no special status
+        "display": "title",
+        // Whether to include the per-app prefix if available.
+        "prefix": false,
+        // When to display the music status.
+        //   "playing" - display the music status when music is playing
+        //   "focused" - display the music status when music app is focused
+        //   "both" - display the music status when music is playing or focused
+        "when": "playing",
+        // Whether to remove extras from the title.
+        "remove_extras": true
+      },
+      "code": {
+        // List of code-related apps to track.
+        "apps": ["dev.zed.zed-preview", "com.microsoft.vscode"],
+        // How to display the code status.
+        //   "both" - display the file and project name
+        //   "project" - display the project name
+        //   "file" - display the file name
+        //   "none" - display no special status
+        "display": "both",
+        // Whether to include the per-app prefix if available.
+        "prefix": false
+      }
+    }
+  }
+}
