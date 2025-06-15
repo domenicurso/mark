@@ -1,3 +1,6 @@
+from typing import NewType
+import os
+
 from .core.fallback import FallbackPlugin
 from .core.idle import IdlePlugin
 
@@ -6,7 +9,6 @@ from .extra.code import CodePlugin
 from .extra.music import MusicPlugin
 
 from .base import Plugin
-from typing import NewType
 
 from utils.types import PluginContext, PluginStatus, PluginSettings
 
@@ -28,9 +30,6 @@ class PluginManager:
         self.settings: PluginSettings = settings
         self.debug: bool = debug
 
-        if self.debug:
-            l.debug("Initializing PluginManager with debug mode enabled.")
-
         plugins: list[Plugin] = []
         plugin_settings: dict = settings.get("statuses", {}).get("plugins", {})
         enabled_plugins: list[PluginID] = [
@@ -40,34 +39,48 @@ class PluginManager:
         # Always include IdlePlugin first.
         try:
             plugins.append(IdlePlugin(settings))
+            self._log_successfully_initialized('idle', len(plugins), len(enabled_plugins))
         except Exception as e:
-            l.error(f"Failed to initialize IdlePlugin: {e}")
+            self._log_failed_to_initialize('idle', len(plugins), len(enabled_plugins), e)
 
         for plugin_id in enabled_plugins:
             try:
                 if plugin_id.strip():
                     if plugin_id in plugin_settings and plugin_id in PLUGINS:
-                        if self.debug:
-                            l.debug(f"Initializing plugin: {plugin_id}")
                         plugins.append(PLUGINS[plugin_id](settings))
-                        if self.debug:
-                            l.success(f"Plugin '{plugin_id}' initialized successfully.")
+                        self._log_successfully_initialized(plugin_id, len(plugins), len(enabled_plugins))
                     elif plugin_id not in PLUGINS:
-                        l.warning(f"Plugin '{plugin_id}' not found.")
+                        self._log_warning(plugin_id, len(plugins), len(enabled_plugins), "not found in library")
                     elif plugin_id not in plugin_settings:
-                        l.warning(f"Plugin '{plugin_id}' has no settings object.")
+                        self._log_warning(plugin_id, len(plugins), len(enabled_plugins), "has no settings object")
             except Exception as e:
-                l.error(f"Failed to initialize plugin '{plugin_id}': {e}")
+                self._log_failed_to_initialize(plugin_id, len(plugins), len(enabled_plugins), e)
 
         # Always add FallbackPlugin last.
-        if self.debug:
-            l.debug("Initializing FallbackPlugin.")
         try:
             plugins.append(FallbackPlugin(settings))
+            self._log_successfully_initialized('fallback', len(plugins), len(enabled_plugins))
         except Exception as e:
-            l.error(f"Failed to initialize FallbackPlugin: {e}")
+            self._log_failed_to_initialize('fallback', len(plugins), len(enabled_plugins), e)
+
+
+        if debug:
+            l.debug(f"Successfully initialized {len(plugins)} plugins")
+
 
         self.plugins: list[Plugin] = plugins
+
+    def _log_successfully_initialized(self, plugin_id: str, current: int, total: int):
+        if self.debug:
+            l.success(f"Plugin \033[0;32m{plugin_id.upper()}\033[0m initialized successfully")
+
+    def _log_failed_to_initialize(self, plugin_id: str, current: int, total: int, error: Exception):
+        if self.debug:
+            l.error(f"Plugin \033[0;31m{plugin_id.upper()}\033[0m failed to initialize: {str(error).upper()}")
+
+    def _log_warning(self, plugin_id: str, current: int, total: int, warning: str):
+        if self.debug:
+            l.warning(f"Plugin \033[0;33m{plugin_id.upper()}\033[0m warning: {warning.upper()}")
 
     def get_status(self, context: PluginContext) -> PluginStatus:
         """
