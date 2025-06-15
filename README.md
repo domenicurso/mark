@@ -1,8 +1,8 @@
+![MarkReadme](https://github.com/user-attachments/assets/d68ba334-eaa7-41bf-a3e0-a561c529d264)
+
 # Mark
 
-> *Leave your mark behind*
-
-Mark is a customizable Discord status manager that automatically updates your status based on the apps you're currently using, your idle time, and other configurable conditions. It was designed to seamlessly integrate with your workflow and provide useful context to your Discord contacts.
+Mark is a customizable Discord status manager that automatically updates your status based on the apps you're currently using, your idle time, and other configurable conditions.
 
 ## Features
 
@@ -15,7 +15,7 @@ Mark is a customizable Discord status manager that automatically updates your st
 
 ## Requirements
 
-- Python 3.12+ (sorry)
+- Python 3.12+
 - Discord Token (see installation instructions)
 
 ### Platform Support
@@ -71,13 +71,9 @@ Go through the installation process.
 ### Command Line Options
 
 - `--fast` or `-f`: Skip the startup screen and launch immediately
-- `--verbose` or `-v`: Enable verbose logging for debugging
-
-### Available Commands
-
-- `run`: Start Mark (default if no command specified)
-- `version` or `v`: Display the current version
-- `getbundle` or `gb`: Tool to help identify app bundle IDs for configuration
+- `--verbose`: Enable verbose logging for debugging
+- `--getbundle` or `--gb`: Get the app bundle of any focused app
+- `--version` or `-v`: Get the current version of Mark
 
 ### Exiting
 
@@ -124,4 +120,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgements
 
 - Created by [@dombom](https://github.com/DomBom16)
-- Thanks to all contributors who have helped improve Mark
