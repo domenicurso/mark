@@ -1,3 +1,9 @@
+from Quartz import (
+    CGEventSourceSecondsSinceLastEventType,
+    kCGAnyInputEventType,
+    kCGEventSourceStateCombinedSessionState,
+)
+
 from .ascript import ascript
 
 
@@ -12,13 +18,6 @@ def get_frontmost_bundle() -> str:
     return frontApp
     """
     return str(ascript(script)).lower()
-
-
-from Quartz import (
-    CGEventSourceSecondsSinceLastEventType,
-    kCGAnyInputEventType,
-    kCGEventSourceStateCombinedSessionState,
-)
 
 
 def get_idle_time() -> float:
