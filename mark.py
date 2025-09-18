@@ -23,7 +23,7 @@ from dotenv import load_dotenv
 
 # Try to import macOS specific modules
 try:
-    from Cocoa import NSLog, NSWorkspace
+    from Cocoa import NSLog, NSWorkspace  # pyright: ignore[reportAttributeAccessIssue]
 
     MACOS_SUPPORT = True
 except ImportError:
@@ -443,28 +443,22 @@ def run(fast: bool, verbose: bool, version: bool, getbundle: bool):
         print(f"Mark v{VERSION}")
         sys.exit(0)
     elif getbundle:
-        getbundle()
+        frontmost = None
+        last_frontmost = None
+        l.info("Focus an app to get its bundle ID")
+        l.info("Press Ctrl+C to exit")
+        try:
+            while True:
+                frontmost = get_frontmost_bundle()
+                if frontmost != last_frontmost:
+                    last_frontmost = frontmost
+                    print(frontmost)
+        except KeyboardInterrupt:
+            pass
         sys.exit(0)
 
     mark = MarkApp()
     mark.run(fast=fast, debug=verbose)
-
-
-def getbundle():
-    """Get the bundle ID of the active app"""
-    frontmost = None
-    last_frontmost = None
-    l.info("Focus an app to get its bundle ID")
-    l.info("Press Ctrl+C to exit")
-    try:
-        while True:
-            frontmost = get_frontmost_bundle()
-            if frontmost != last_frontmost:
-                last_frontmost = frontmost
-                print(frontmost)
-    except KeyboardInterrupt:
-        pass
-    sys.exit(0)
 
 
 if __name__ == "__main__":

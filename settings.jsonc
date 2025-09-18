@@ -98,7 +98,7 @@
         //   "project" - display the project name
         //   "file" - display the file name
         //   "none" - display no special status
-        "display": "both",
+        "display": "none",
         // Whether to include the per-app prefix if available.
         "prefix": false
       }
