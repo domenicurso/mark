@@ -1,6 +1,6 @@
 from zenif.log import Logger
 
-l = Logger(
+l = Logger(  # noqa: E741
     {
         "log_line": {
             "format": [
