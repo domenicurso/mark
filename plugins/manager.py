@@ -1,5 +1,4 @@
 from typing import NewType
-import os
 
 from .core.fallback import FallbackPlugin
 from .core.idle import IdlePlugin
@@ -11,6 +10,7 @@ from .extra.music import MusicPlugin
 from .base import Plugin
 
 from utils.types import PluginContext, PluginStatus, PluginSettings
+from utils.constants import FB_ICON, FB_TEXT, l
 
 PluginID = NewType("PluginID", str)
 
@@ -22,7 +22,6 @@ PLUGINS: dict[PluginID, Plugin] = {
     PluginID("code"): CodePlugin,
 }
 
-from utils.constants import FB_ICON, FB_TEXT, l
 
 
 class PluginManager:
