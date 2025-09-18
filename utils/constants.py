@@ -8,14 +8,15 @@ l = Logger(  # noqa: E741
                     "type": "template",
                     "value": "level",
                     "parameters": [
-                        {"color": {"foreground": "default"}},
-                        {"truncate": {"width": 0, "marker": ""}},
-                        {"affix": {"prefix": ">> "}},
+                        {"color": {"foreground": "default"}},  # use level color
+                        {
+                            "truncate": {"width": 0, "marker": ""}
+                        },  # remove actual level text
+                        {"affix": {"prefix": ">> "}},  # replace with ">>"
                     ],
                 }
             ]
         },
-        "timestamps": {"always_show": True},
     }
 )
 
